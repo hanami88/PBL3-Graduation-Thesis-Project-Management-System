@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/SV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Đồ Án</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="chitiet.html" class="detail">
+          <i class="fa-solid fa-code-branch"></i>
+          <span>Chi tiết đồ án</span>
+        </a>
+        <a href="tiendo.html" class="progess">
+          <i class="fa-solid fa-bars-progress"></i>
+          <span>Tiến độ đồ án</span>
+        </a>
+        <a href="diemso.html" class="score">
+          <i class="fa-solid fa-award"></i>
+          <span>Điểm Số</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-code-branch"></i>
+            <span>Chi tiết đồ án</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+
+        <div class="right-container">
+          <div class="right-container-top">
+            <div class="right-container-info">
+              <div class="thongtin1-box1">
+                <div>ID đồ án :</div>
+                <div class="value"></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Tên đồ án :</div>
+                <div class="value"></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Ngày bắt đầu :</div>
+                <div class="value"></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Ngày kết thúc :</div>
+                <div class="value"></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Trạng thái :</div>
+                <div class="value"></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>GV Hướng Dẫn :</div>
+                <div class="value"></div>
+              </div>
+            </div>
+
+            <div class="right-container-detail">
+              <div>Mô tả :</div>
+              <div class="value"></div>
+            </div>
+          </div>
+
+          <div class="right-container-bot1">
+            <div class="right-container-cmt">
+              <div>Yêu Cầu của GV Hướng Dẫn :</div>
+              <div class="value"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadProjectDetail() {
+        const mssv = localStorage.getItem('ID');
+        console.log("MSSV:", mssv);
+
+        if (!mssv) {
+          console.error("Không tìm thấy MSSV trong localStorage");
+          return;
+        }
+
+        fetch(`http://localhost:5266/api/DoAn/GetDoAn?userId=${mssv}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Không thể lấy dữ liệu");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            console.log(data.mssv);
+
+            // Nếu API trả về mssv để kiểm tra
+            if (data.mssv?.toString().trim() !== mssv?.toString().trim()) {
+                alert("MSSV không khớp!");
+                return;
+            }
+
+            // Cập nhật thông tin chi tiết đồ án
+            const infoBoxes = document.querySelectorAll(
+              ".right-container-info .thongtin1-box1 .value"
+            );
+
+            const fields = [
+              "id",
+              "ten",
+              "start",
+              "end",
+              "status",
+              "gvhd",
+            ];
+
+            fields.forEach((field, index) => {
+              infoBoxes[index].textContent = data[field] || "Không có dữ liệu";
+            });
+            localStorage.setItem('DoAnId', data.id);
+            localStorage.setItem('DoAnName', data.ten);
+            localStorage.setItem('DoAnStatus', data.status);
+            localStorage.setItem('DoAnGVHD', data.gvhd);
+
+            // Cập nhật mô tả
+            const detailValue = document.querySelector(
+              ".right-container-detail .value"
+            );
+            detailValue.textContent = data.detail || "Không có dữ liệu";
+
+            // Cập nhật yêu cầu GV hướng dẫn
+            const requirementValue = document.querySelector(
+              ".right-container-cmt .value"
+            );
+            requirementValue.textContent = data.requirement || "Không có dữ liệu";
+          })
+          .catch((error) => {
+            console.error("Lỗi khi tải dữ liệu:", error);
+          });
+      }
+
+      window.onload = loadProjectDetail;
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+    </script>
+  </body>
+</html>

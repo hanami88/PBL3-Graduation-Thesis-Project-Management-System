@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/SV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông Tin Sinh Viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user"></i>
+          <span>Mai Anh Luan </span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="chitiet.html" class="detail">
+          <i class="fa-solid fa-code-branch"></i>
+          <span>Chi tiết đồ án </span>
+        </a>
+        <a href="tiendo.html" class="progess">
+          <i class="fa-solid fa-bars-progress"></i>
+          <span>Tiến độ đồ án</span>
+        </a>
+        <a href="diemso.html" class="score">
+          <i class="fa-solid fa-award"></i>
+          <span>Điểm Số</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Thông tin sinh viên</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="chitietsinhvien">
+          <div class="chitiet-thongtinsv">Thông Tin Sinh Viên</div>
+          <div class="thongtincanhan chitiet">
+            <div class="picture-box">
+              <img src="" alt="Ảnh sinh viên" class="picture" id="picture" />
+            </div>
+            <div class="thongtin1">
+              <div class="thongtin1-box1">
+                <div>Họ và tên :</div>
+                <div><input type="text" id="hoten"/></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Ngày sinh :</div>
+                <div><input type="date" id="ngaysinh"/></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Khoa :</div>
+                <div><input type="text" id="khoa"/></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Lớp học phần :</div>
+                <div><input type="text" id="lopHocPhan"/></div>
+              </div>
+            </div>
+            <div class="thongtin1">
+              <div class="thongtin1-box1">
+                <div>MSSV :</div>
+                <div><input type="text" id="mssv"/></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Email :</div>
+                <div><input type="text" id="email"/></div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>SDT :</div>
+                <div><input type="text" id="sdt"/></div>
+              </div>
+              <div class="thongtin1-box2 special">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="CreateACC" class="CreateAccount">
+          <a class="change-password">Tạo tài khoản</a>
+          <form action="" class="create-account active">
+          <input 
+            type="password" 
+            name="" 
+            id="MKC" 
+            placeholder="Mật Khẩu Cũ" />
+          <input
+            type="password"
+            name=""
+            id="MKM"
+            placeholder="Mật Khẩu Mới"
+          />
+          <input
+            type="password"
+            name=""
+            id="XN"
+            placeholder="Xác nhận"
+          />
+          <button type="button" onclick="ChangePassword()" class="okpassword">Xác nhận</button>
+          <button type="button" onclick="Dong()" class="dongbtn">X</button>
+          </form>
+        </div>
+        <button style="margin-top: 30px" class="okpassword" onclick="ToggleChangePass()">Change Password</button>
+      </div>
+    </div>
+
+    <script>
+
+      function loadUserInfo() {
+        const mssv = localStorage.getItem('ID');
+        console.log("MSSV:", mssv);
+
+        if (!mssv) {
+          console.error("Không tìm thấy MSSV trong localStorage");
+          return;
+        }
+
+        fetch(`http://localhost:5266/api/User/GetUserByMSSV?mssv=${mssv}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Không tìm thấy người dùng");
+            }
+            return response.json();
+          })
+          .then(user => {
+            console.log(user);
+
+            document.getElementById("hoten").value = user.hoTen || "";
+            document.getElementById("ngaysinh").value = user.ngaySinh
+              ? new Date(user.ngaySinh).toISOString().split('T')[0]
+              : "";
+            document.getElementById("khoa").value = user.khoa || "";
+            document.getElementById("lopHocPhan").value = user.lopHocPhan || "";
+            document.getElementById("mssv").value = user.mssv || "";
+            document.getElementById("email").value = user.email || "";
+            document.getElementById("sdt").value = user.sdt || "";
+            document.getElementById("picture").src = user.anhDaiDien || ""; // Nếu có ảnh
+          })
+          .catch(error => {
+            console.error("Lỗi khi lấy thông tin người dùng:", error);
+          });
+      }
+
+      window.onload = loadUserInfo;
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+
+      function capNhatGiangVien() {
+        const mssv = localStorage.getItem('ID');
+        if (!mssv) {
+          alert("Không tìm thấy ID sinh viên trong URL.");
+          return;
+        }
+
+        const hoTen = document.getElementById("hoten").value;
+        const ngaySinh = document.getElementById("ngaysinh").value;
+        const khoa = document.getElementById("khoa").value;
+        const lopHocPhan = document.getElementById("lopHocPhan").value;
+        const email = document.getElementById("email").value;
+        const soDienThoai = document.getElementById("sdt").value;
+
+        const updatedSinhVien = {
+          MSSV: parseInt(mssv),
+          HoTen: hoTen,
+          NgaySinh: new Date(ngaySinh).toISOString(),
+          Khoa: khoa,
+          LopHocPhan: lopHocPhan,
+          Email: email,
+          SDT: soDienThoai
+        };
+
+        console.log("Dữ liệu gửi lên:", updatedSinhVien);
+
+        fetch(`http://localhost:5266/api/User/UpdateSinhVien/${mssv}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedSinhVien),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error("Lỗi khi cập nhật sinh viên");
+            alert("Cập nhật thành công!");
+          })
+          .catch((error) => {
+            console.error("Lỗi:", error);
+            alert("Không thể cập nhật thông tin sinh viên.");
+          });
+      }
+
+      document.querySelectorAll(".thongtincanhan input").forEach((input) => {
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            capNhatGiangVien();
+          }
+        });
+      });
+
+      function ToggleChangePass() {
+        const box = document.getElementById("CreateACC");
+        box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+      }
+
+      function Dong() {
+        const box = document.getElementById("CreateACC");
+        box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+      }
+
+      function ChangePassword() {
+        const mssv = localStorage.getItem('ID');
+        const oldPass = document.getElementById("MKC").value.trim();
+        const newPass = document.getElementById("MKM").value.trim();
+        const confirmPass = document.getElementById("XN").value.trim();
+
+        if (newPass !== confirmPass) {
+          alert("Xác nhận mật khẩu không trùng khớp!");
+          return;
+        }
+
+        const data = {
+          id: mssv,
+          oldPassword: oldPass,
+          newPassword: newPass
+        };
+
+        fetch("http://localhost:5266/api/Account/ChangePassword", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(res => {
+            if (!res.ok) throw new Error("Lỗi khi thay đổi mật khẩu");
+            return res.text();
+          })
+          .then(result => {
+            alert("Đổi mật khẩu thành công!");
+            document.getElementById("MKC").value = "";
+            document.getElementById("MKM").value = "";
+            document.getElementById("XN").value = "";
+          })
+          .catch(err => {
+            console.error(err);
+            alert("Không thể đổi mật khẩu. Vui lòng kiểm tra lại mật khẩu cũ hoặc thử lại sau.");
+          });
+      }
+    </script>
+  </body>
+</html>

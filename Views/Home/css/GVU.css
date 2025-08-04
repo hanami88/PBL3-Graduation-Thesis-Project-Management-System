@@ -1,0 +1,312 @@
+html {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+@media (min-width: 2561px) {
+  html {
+    font-size: 75%; /* 1rem = 12px → phóng to nhẹ */
+  }
+}
+
+/* === Laptop lớn, iMac: 1441px - 2560px === */
+@media (min-width: 1441px) and (max-width: 2560px) {
+  html {
+    font-size: 62.5%; /* 1rem = 10px */
+  }
+}
+
+/* === Laptop phổ thông: 1281px - 1440px === */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* === Tablet ngang / Laptop nhỏ: 1025px - 1280px === */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  html {
+    font-size: 56.25%; /* 1rem = 9px */
+  }
+}
+
+/* === Tablet dọc / Mobile lớn: 769px - 1024px === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 50%; /* 1rem = 8px */
+  }
+}
+
+/* === Mobile phổ thông: 577px - 768px === */
+@media (min-width: 577px) and (max-width: 768px) {
+  html {
+    font-size: 46.875%; /* 1rem = 7.5px */
+  }
+}
+
+/* === Mobile nhỏ: ≤ 576px === */
+@media (max-width: 576px) {
+  html {
+    font-size: 43.75%; /* 1rem = 7px */
+  }
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.left {
+  height: 100%;
+  background-color: #1e3050;
+  width: 20%;
+  border-radius: 0rem 1rem 1rem 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: scroll;
+}
+.gachngang {
+  width: 270rem;
+  height: 0.2rem;
+  background-color: #1e3050;
+}
+.right-container-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+.thongtindoan {
+  width: 100%;
+}
+
+.text-thongtindoan {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-top: 3rem;
+}
+.fa-solid {
+  color: white;
+  font-size: 3.9rem;
+  margin-right: 1.5rem;
+  width: 4rem;
+  margin-left: 1rem;
+}
+span {
+  font-size: 1.9rem;
+  color: white;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+h1 {
+  font-size: 2.9rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+.gachngang {
+  margin-bottom: 2rem;
+}
+.xinchao {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  margin-bottom: 2rem;
+}
+.gachngang2 {
+  width: 28.7rem;
+  height: 0.2rem;
+  background-color: white;
+  margin-bottom: 2rem;
+}
+.detail,
+.progess,
+.score,
+.info {
+  display: flex;
+  align-items: center;
+  width: 17vw;
+  height: 7vh;
+  margin-bottom: 5rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0054e6;
+  }
+}
+.hienthi {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.hienthi-thongtin {
+  display: flex;
+  align-items: center;
+}
+.hienthi-thongtin > :nth-child(1) {
+  color: #1e3050;
+}
+.hienthi-thongtin > :nth-child(2) {
+  color: #1e3050;
+}
+.btn-out {
+  cursor: pointer;
+  width: 15rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border: none;
+  background-color: #1e3050;
+  &:hover {
+    background-color: #0054e6;
+  }
+}
+.fa-right-from-bracket {
+  font-size: 2.4rem;
+}
+.out {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-right: 1rem;
+  width: 15rem;
+}
+.change-password {
+  margin-top: 5rem;
+  width: 12.5rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 0.1rem solid gray;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    background-color: #0054e6;
+    color: white;
+  }
+  margin-bottom: 5rem;
+}
+.formchange-passwork {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formchange-passwork input {
+  width: 60rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+  border: 0.15rem solid #1e3050;
+  padding-left: 2rem;
+}
+.okpassword {
+  width: 13rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #1e3050;
+  color: white;
+  margin-top: 2rem;
+  &:hover {
+    background-color: #0054e6;
+  }
+}
+.formchange-passwork.hidden {
+  display: none;
+}
+.change-password.on {
+  background-color: #0054e6;
+  color: white;
+}
+.thongtincanhan-gvu {
+  color: black;
+  font-size: 6rem;
+  font-weight: 400;
+  margin-top: 4rem;
+}
+.thongtincanhan {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.thongtincanhan-tieude {
+  color: black;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+}
+.mau {
+  width: 45vw;
+  height: 45vh;
+}
+.exlb {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.form-excel {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+#excelFile {
+  display: none;
+}
+label[for="excelFile"] {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 20rem;
+  &:hover {
+    background-color: #4aa74d;
+    color: rgb(179, 179, 179);
+  }
+}
+.tailen {
+  display: inline-block;
+  padding: 1.2rem 2.4rem;
+  background-color: #1e3050;
+  color: white;
+  &:hover {
+    background-color: #152137;
+    color: rgb(184, 184, 184);
+  }
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}

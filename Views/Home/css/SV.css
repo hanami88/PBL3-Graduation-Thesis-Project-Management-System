@@ -1,0 +1,472 @@
+html {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  position: fixed;
+}
+@media (min-width: 2561px) {
+  html {
+    font-size: 75%; /* 1rem = 12px → phóng to nhẹ */
+  }
+}
+
+/* === Laptop lớn, iMac: 1441px - 2560px === */
+@media (min-width: 1441px) and (max-width: 2560px) {
+  html {
+    font-size: 62.5%; /* 1rem = 10px */
+  }
+}
+
+/* === Laptop phổ thông: 1281px - 1440px === */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* === Tablet ngang / Laptop nhỏ: 1025px - 1280px === */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  html {
+    font-size: 56.25%; /* 1rem = 9px */
+  }
+}
+
+/* === Tablet dọc / Mobile lớn: 769px - 1024px === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 50%; /* 1rem = 8px */
+  }
+}
+
+/* === Mobile phổ thông: 577px - 768px === */
+@media (min-width: 577px) and (max-width: 768px) {
+  html {
+    font-size: 46.875%; /* 1rem = 7.5px */
+  }
+}
+
+/* === Mobile nhỏ: ≤ 576px === */
+@media (max-width: 576px) {
+  html {
+    font-size: 43.75%; /* 1rem = 7px */
+  }
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.left {
+  height: 100%;
+  background-color: #1e3050;
+  width: 20%;
+  border-radius: 0rem 1rem 1rem 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gachngang {
+  width: 200vw;
+  height: 0.2rem;
+  background-color: #1e3050;
+}
+.fa-solid {
+  color: white;
+  font-size: 3.9rem;
+  margin-right: 1rem;
+  width: 4rem;
+  margin-left: 1rem;
+}
+span {
+  font-size: 1.9rem;
+  color: white;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.9rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+.gachngang {
+  margin-bottom: 1.8rem;
+}
+.xinchao {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  margin-bottom: 2rem;
+}
+.gachngang2 {
+  width: 28.7rem;
+  height: 0.2rem;
+  background-color: white;
+  margin-bottom: 2rem;
+}
+.detail,
+.progess,
+.score,
+.info {
+  display: flex;
+  align-items: center;
+  width: 17vw;
+  height: 7vh;
+  margin-bottom: 5rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0054e6;
+  }
+}
+textarea {
+}
+.hienthi {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.hienthi-thongtin {
+  display: flex;
+  align-items: center;
+}
+.hienthi-thongtin > :nth-child(1) {
+  color: #1e3050;
+}
+.hienthi-thongtin > :nth-child(2) {
+  color: #1e3050;
+}
+.btn-out {
+  cursor: pointer;
+  width: 15rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border: none;
+  background-color: #1e3050;
+  &:hover {
+    background-color: #0054e6;
+  }
+}
+.fa-right-from-bracket {
+  font-size: 2.4rem;
+}
+.out {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+  margin-right: 1rem;
+  width: 15rem;
+}
+
+.thongtincanhan {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100rem;
+}
+.picture-box {
+  width: 14rem;
+  height: 17.5rem;
+  border: 0.2rem solid black;
+}
+.picture {
+  width: 14em;
+  height: 17.5rem;
+}
+.thongtin1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18rem;
+}
+
+.thongtin1-box1 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.thongtin1-box1 > :nth-child(1) {
+  font-size: 1.6rem;
+  margin-right: 1rem;
+}
+.thongtin1-box1 > :nth-child(2) {
+  width: 19.6rem;
+  height: 2.8rem;
+  background-color: #e1e1e1;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 1.2rem 0rem 0rem 1rem;
+}
+.thongtin1-box1 > div:nth-child(2) input {
+  width: 100%;     
+  height: 100%; 
+  font-size: 1.6rem;
+  font-weight: 600;
+  background-color: transparent; 
+  border: none;
+  outline: none;
+  padding-left: 1rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+}
+
+.special {
+  background-color: white;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 1.2rem 0rem 0rem 1rem;
+  color: white;
+}
+.formchange-passwork {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formchange-passwork input {
+  width: 60rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  border: 0.15rem solid #1e3050;
+  padding-left: 2rem;
+}
+.okpassword {
+  width: 13rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #1e3050;
+  color: white;
+  margin-top: 0rem;
+  &:hover {
+    background-color: #0054e6;
+  }
+}
+.formchange-passwork.hidden {
+  display: none;
+}
+.change-password.on {
+  background-color: #0054e6;
+  color: white;
+}
+.right-container {
+  width: 1000px;
+  height: 80%;
+  margin-top: 40px;
+}
+.right-container1 {
+  width: 1000px;
+  height: 80%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right-container-detail {
+  display: flex;
+  align-items: center;
+}
+.right-container-detail > :nth-child(1) {
+  font-size: 1.7rem;
+  color: black;
+  font-weight: 500;
+  margin-right: 2rem;
+}
+.right-container-detail > :nth-child(2) {
+  width: 39rem;
+  height: 19rem;
+  border-radius: 0.8rem;
+  border: 0.15rem solid black;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+.right-container-cmt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 45vh;
+  width: 100rem;
+}
+.right-container-cmt > :nth-child(1) {
+  font-size: 1.8rem;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.right-container-cmt > :nth-child(2) {
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  border-radius: 0.8rem;
+  border: 0.15rem solid black;
+  height: 90%;
+  width: 100rem;
+  font-family: "Roboto", sans-serif;
+}
+.right-container-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 68vw;
+  margin-bottom: 1rem;
+  height: 70vh;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100rem;
+  margin-top: 4rem;
+}
+.right-top-left > :nth-child(1),
+.right-top-right > :nth-child(1) {
+  margin-bottom: 3rem;
+  font-size: 1.8rem;
+  color: black;
+}
+.right-top-left,
+.right-top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.thongtin1-box1 > :nth-child(3) {
+  font-size: 1.7rem;
+  margin-left: 1rem;
+  width: 23rem;
+}
+.right-container-bot {
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+}
+.right-container-bot > :nth-child(1) {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+}
+.bot-box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  margin-right: 2rem;
+}
+.bot-box1 > :nth-child(1) {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+.bot-box1 > :nth-child(2) {
+  width: 70rem;
+  height: 4rem;
+  border-radius: 1rem;
+  border: 0.15rem solid black;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: "Roboto";
+  font-size: 1.7rem;
+}
+.CreateAccount {
+  position: fixed;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background-color: #ffffff;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  z-index: 9999;
+  width: 400px;
+  height: 240px;
+  max-width: 90%;
+}
+
+.change-password {
+  margin-top: 4rem;
+  width: 21rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.create-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.create-account input {
+  width: 42rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  border: 0.15rem solid #1e3050;
+  padding-left: 2rem;
+}
+.selected {
+  background-color: #f0f0f0;
+  border: 2px solid #4CAF50;
+}
+.dongbtn {
+  margin-right:-385px;
+  margin-top:-260px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background-color: #1e3050;
+  color: white;
+}
+.dongbtn:hover {
+  background-color: #0054e6;
+  cursor: pointer;
+}

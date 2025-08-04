@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/GV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-tie"></i>
+          <span id="gvhd-name"></span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="quanlydoan.html" class="detail">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>Quản lý đồ án hướng dẫn</span>
+        </a>
+        <a href="lichsu.html" class="progess">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Lịch sử hướng dẫn</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Quản lý đồ án hướng dẫn</span>
+          </div>
+          <button class="btn-out" onclick="LogOut()">
+            <i class="fa-solid fa-right-from-bracket" ></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="right-container">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Nhập tên đồ án cần tìm ..."
+          />
+          <div class="thongtinsv-container">
+            <h1 class="thongtinsv">
+              Thông tin các đồ án tốt nghiệp đang phụ trách:
+            </h1>
+            <div class="tong" id="total-count">Tổng: 0</div>
+          </div>
+          <div class="right-information">
+            <div>
+              <div>STT</div>
+              <div>Tên đồ án</div>
+              <div>MSSV thực hiện</div>
+              <div>Cập Nhật Tiến Độ</div>
+            </div>
+            <div class="information-container" id="project-list">
+              <!-- Kết quả sẽ được thêm vào đây -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      
+      const gvhd = localStorage.getItem("GVName");
+      document.getElementById("gvhd-name").textContent = gvhd || "Chưa có tên";
+
+      async function loadProjects() {
+        try {
+          const response = await fetch(`http://localhost:5266/api/QLDoAn/by-gvhd?gvhd=${encodeURIComponent(gvhd)}`);
+          const data = await response.json();
+          const listContainer = document.getElementById("project-list");
+          const totalCount = document.getElementById("total-count");
+
+          listContainer.innerHTML = "";
+          totalCount.textContent = `Tổng: ${data.length}`;
+
+          data.forEach((item, index) => {
+            if (normalize(item.status) === "đang thuc hien") {
+              const div = document.createElement("div");
+              div.classList.add("thanhphan");
+              div.innerHTML = `
+                <div>${index + 1}</div>
+                <div class="tendoan">${item.tenDoAn}</div>
+                <div>${item.mssv}</div>
+                <a href="./capnhattiendo.html?doAnId=${item.doAnId}">1</a>
+                <a href="./chitietdoan.html?doAnId=${item.doAnId}">Chi tiết</a>
+              `;
+              listContainer.appendChild(div);
+            }
+          });
+
+        } catch (err) {
+          console.error("Lỗi khi load dữ liệu:", err);
+        }
+      }
+
+      window.onload = loadProjects;
+      function LogOut() {
+        localStorage.clear();
+        window.location.href = "../Login/index.html";
+      };
+
+      document.getElementById("search-input").addEventListener("input", function () {
+        const keyword = this.value.toLowerCase(); 
+        const items = document.querySelectorAll("#project-list .thanhphan");
+
+        items.forEach((item) => {
+          const tenDoAn = item.children[1].textContent.toLowerCase();
+          if (tenDoAn.includes(keyword)) {
+            item.style.display = ""; 
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+
+      function removeVietnameseTones(str) {
+        return str
+          .normalize("NFD")                      
+          .replace(/[\u0300-\u036f]/g, "")      
+          .replace(/đ/g, "d")           
+          .replace(/Đ/g, "D")
+          .replace(/\s+/g, " ")       
+          .trim();                    
+      }
+
+      document.getElementById("search-input").addEventListener("input", function () {
+        const keyword = removeVietnameseTones(this.value.toLowerCase());
+        const items = document.querySelectorAll("#project-list .thanhphan");
+
+        items.forEach((item) => {
+          const tenDoAn = removeVietnameseTones(item.querySelector(".tendoan").textContent.toLowerCase());
+          if (tenDoAn.includes(keyword)) {
+            item.style.display = "";
+            console.log("Gõ vào:", this.value, "=> Sau khi bỏ dấu:", keyword);
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+
+      function normalize(str) {
+        return String(str)
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .trim()
+          .toLowerCase();
+      }
+    </script>
+  </body>
+</html>

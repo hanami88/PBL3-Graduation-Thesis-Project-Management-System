@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông Tin Sinh Viên</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/GVU.css" />
+
+    <!-- Font và icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- SheetJS để đọc Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-secret"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="themsv.html" class="detail">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </a>
+        <a href="danhsachsinhvien.html" class="progess">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Danh sách đồ án tốt nghiệp</span>
+        </a>
+        <a href="nhapdiem.html" class="progess">
+          <i class="fa-solid fa-award"></i>
+          <span>Nhập điểm</span>
+        </a>
+        <a href="taikhoangiangvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin giảng viên</span>
+        </a>
+        <a href="taikhoansinhvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin sinh viên</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-award"></i>
+            <span>Nhập điểm</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+
+        <div class="thongtincanhan">
+          <h1 class="thongtincanhan-tieude">
+            Bạn hãy thêm file excel thông tin điểm theo định dạng dưới đây:
+          </h1>
+          <img src="../picture/excel.png" alt="excel mẫu" class="mau" />
+          <form class="form-excel">
+            <label for="excelFile" class="exlb">Chọn file Excel</label>
+            <input
+              type="file"
+              id="excelFile"
+              name="excelFile"
+              accept=".xlsx, .xls"
+            />
+            <button type="button" class="tailen" onclick="uploadExcel()">Tải lên</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+
+      function uploadExcel() {
+        const fileInput = document.getElementById("excelFile");
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Vui lòng chọn file Excel!");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: "array" });
+          const sheet = workbook.Sheets[workbook.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+          // Bỏ dòng tiêu đề
+          const dataRows = rows.slice(1);
+
+          dataRows.forEach((row, index) => {
+            if (row.length < 5) return;
+
+            const diemSo = {
+              diemHoiDong: parseInt(row[0]) || 0,
+              diemHuongDan: parseInt(row[1]) || 0,
+              diemPhanBien: parseInt(row[2]) || 0,
+              diemTrungBinh: parseInt(row[3]) || 0,
+              doAnId: parseInt(row[4]) || 0
+            };
+
+            fetch("http://localhost:5266/api/DiemSoLoad", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(diemSo)
+            })
+              .then(response => {
+                if (!response.ok) {
+                  console.error("Ghi thất bại dòng", index + 2);
+                } else {
+                  console.log("Đã ghi dòng", index + 2);
+                }
+              })
+              .catch(error => {
+                console.error("Lỗi dòng", index + 2, error);
+              });
+          });
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+    </script>
+  </body>
+</html>

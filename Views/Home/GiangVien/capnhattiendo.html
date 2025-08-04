@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/GV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Inter&family=Poppins&family=Roboto&family=Sora&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Đồ Án</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-tie"></i>
+          <span>Mai Anh Luan </span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="quanlydoan.html" class="detail">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>Quản lý đồ án hướng dẫn</span>
+        </a>
+        <a href="lichsu.html" class="progess">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Lịch sử hướng dẫn</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span>Tiến độ đồ án</span>
+          </div>
+          <button class="btn-out" onclick="LogOut()" id="btnLogout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="right-container1">
+          <div class="right-container-top">
+            <div class="right-top-left">
+              <h1>Thông tin đồ án</h1>
+              <div id="thongTinDoAn">
+                <div class="thongtin1-box1">
+                  <div>Tên đồ án :</div>
+                  <div id="tenDoAn"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>ID đồ án :</div>
+                  <div id="idDoAn"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Trạng thái :</div>
+                  <div id="trangThaiDoAn"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>GV Hướng Dẫn :</div>
+                  <div id="gvHuongDan"></div>
+                </div>
+              </div>
+            </div>
+            <div class="right-top-right">
+              <h1>Cập nhật tiến độ</h1>
+              <div>
+                <div class="thongtin1-box2">
+                  <div>Lần 1 :</div>
+                  <select id="tienDoLan1">
+                    <option value="NO">Chưa Hoàn Thành</option>
+                    <option value="YES">Hoàn Thành</option>
+                  </select>
+                  <i class="fa-solid fa-caret-down"></i>
+                  <div id="thoiGianLan1"></div>
+                </div>
+                <div class="thongtin1-box2">
+                  <div>Lần 2 :</div>
+                  <select id="tienDoLan2">
+                    <option value="NO">Chưa Hoàn Thành</option>
+                    <option value="YES">Hoàn Thành</option>
+                  </select>
+                  <i class="fa-solid fa-caret-down"></i>
+                  <div id="thoiGianLan2"></div>
+                </div>
+                <div class="thongtin1-box2">
+                  <div>Lần 3 :</div>
+                  <select id="tienDoLan3">
+                    <option value="NO">Chưa Hoàn Thành</option>
+                    <option value="YES">Hoàn Thành</option>
+                  </select>
+                  <i class="fa-solid fa-caret-down"></i>
+                  <div id="thoiGianLan3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-container-bot">
+            <div>Mô tả tiến độ</div>
+            <div class="bot-box1">
+              <div>Lần 1 :</div>
+              <textarea id="moTaLan1" placeholder="Nhập mô tả tiến độ..."></textarea>
+            </div>
+            <div class="bot-box1">
+              <div>Lần 2 :</div>
+              <textarea id="moTaLan2" placeholder="Nhập mô tả tiến độ..."></textarea>
+            </div>
+            <div class="bot-box1">
+              <div>Lần 3 :</div>
+              <textarea id="moTaLan3" placeholder="Nhập mô tả tiến độ..."></textarea>
+            </div>
+          </div>
+          <button id="btnLuuTienDo" onclick="capNhatTienDo()" class="okpassword">
+            Lưu 
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = "http://localhost:5266";
+      const urlParams = new URLSearchParams(window.location.search);
+      const doAnId = urlParams.get('doAnId') || localStorage.getItem('doAnId');
+      let tienDoBanDau = [];
+
+      async function fetchTienDo(id) {
+        try {
+          const res = await fetch(`${API_BASE}/api/TienDoCS/${id}`);
+          if (!res.ok) throw new Error("Không tìm thấy dữ liệu tiến độ");
+          return await res.json(); 
+        } catch (err) {
+          console.error(err);
+          alert("Không thể tải dữ liệu tiến độ");
+          return [];
+        }
+      }
+
+      function renderData(tienDoList) {
+        tienDoBanDau = JSON.parse(JSON.stringify(tienDoList));
+
+        for (let i = 0; i < 3; i++) {
+          const td = tienDoList[i] || { status: "NO", noiDung: "", ngayCapNhat: "" };
+          const statusValue = td.status ? td.status.toUpperCase() : "NO";
+
+          document.getElementById(`tienDoLan${i + 1}`).value = statusValue;
+          document.getElementById(`moTaLan${i + 1}`).value = td.noiDung;
+          document.getElementById(`thoiGianLan${i + 1}`).textContent =
+            td.ngayCapNhat ? `Vào lúc: ${td.ngayCapNhat}` : "";
+        }
+      }
+
+      async function capNhatTienDo() {
+        let daCapNhat = false;
+
+        for (let i = 1; i <= 3; i++) {
+          const status = document.getElementById(`tienDoLan${i}`).value;
+          const noiDung = document.getElementById(`moTaLan${i}`).value;
+
+          const banDau = tienDoBanDau[i - 1] || { status: "NO", noiDung: "" };
+
+          if (
+            status.toUpperCase() === (banDau.status || "NO").toUpperCase() &&
+            noiDung.trim() === (banDau.noiDung || "").trim()
+          ) {
+            continue;
+          }
+
+          const dto = {
+            ThuTu: i,
+            Status: status,
+            NoiDung: noiDung,
+            DoAnId: parseInt(doAnId)
+          };
+
+          try {
+            const res = await fetch(`${API_BASE}/api/TienDoCS/Update`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(dto)
+            });
+
+            if (!res.ok) {
+              const errText = await res.text();
+              alert(`Cập nhật thất bại lần ${i}: ${errText}`);
+              return;
+            }
+
+            daCapNhat = true;
+          } catch (error) {
+            console.error(error);
+            alert("Lỗi kết nối tới server");
+            return;
+          }
+        }
+
+        if (daCapNhat) {
+          alert("Cập nhật tiến độ thành công");
+          loadData();
+        } else {
+          alert("Không có thay đổi nào để lưu.");
+        }
+      }
+
+      async function loadData() {
+        if (!doAnId) {
+          alert("Không có mã đồ án!");
+          return;
+        }
+
+        const doAn = await fetchThongTinDoAn(doAnId);
+        renderDoAn(doAn);
+
+        const tienDoList = await fetchTienDo(doAnId);
+        renderData(tienDoList);
+      }
+
+      async function fetchThongTinDoAn(doAnId) {
+        try {
+          const res = await fetch(`${API_BASE}/api/DoAn/${doAnId}`);
+          if (!res.ok) throw new Error("Không tìm thấy thông tin đồ án");
+          const data = await res.json();
+
+          document.getElementById("tenDoAn").textContent = data.ten;
+          document.getElementById("idDoAn").textContent = data.id;
+          document.getElementById("trangThaiDoAn").textContent = data.status;
+          document.getElementById("gvHuongDan").textContent = data.gvhd;
+        } catch (err) {
+          console.error(err);
+          alert("Lỗi khi tải thông tin đồ án");
+        }
+      }
+
+      function renderDoAn(doAn) {
+        if (!doAn) return;
+
+        document.getElementById("tenDoAn").textContent = doAn.tenDoAn || "N/A";
+        document.getElementById("idDoAn").textContent = doAn.id || "N/A";
+        document.getElementById("trangThaiDoAn").textContent = doAn.trangThai || "N/A";
+        document.getElementById("gvHuongDan").textContent = doAn.giangVienHuongDan || "N/A";
+      }
+
+      function LogOut() {
+        localStorage.clear();
+        window.location.href = "../Login/index.html";
+      }
+
+      loadData();
+    </script>
+  </body>
+</html>

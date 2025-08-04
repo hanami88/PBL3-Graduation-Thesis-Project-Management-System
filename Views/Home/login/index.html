@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập</title>
+  </head>
+  <body>
+    <img src="../picture/image.png" class="bg" />
+    <div class="container">
+      <div class="login">
+        <h1 class="login-title">Đăng Nhập</h1>
+        <img src="../picture/it.png" alt="" class="login-picture" />
+        <form action="" class="login-form">
+          <div class="user-container">
+            <i class="fa-solid fa-user"></i>
+            <input
+              type="text"
+              name=""
+              id="user"
+              placeholder="Nhập MSSV hoặc Email"
+              class="user"
+            />
+          </div>
+          <div class="password-container">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              type="password"
+              name=""
+              id="pass"
+              placeholder="Nhập mật khẩu"
+              class="password"
+            />
+          </div>
+          <div class="login-container">
+            <div class="remember">
+              <input type="checkbox" name="" id="" />
+              <div class="remember-title">Nhớ mật khẩu</div>
+            </div>
+            <a href="" class="fgpass">Quên mật khẩu ?</a>
+          </div>
+          <button onclick="Login(event)" class="btn">ĐĂNG NHẬP</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    async function Login(event) {
+      event.preventDefault();
+      const username = document.getElementById('user').value;
+      const password = document.getElementById('pass').value;
+      const res = await fetch('http://localhost:5266/api/Account', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ UserName: username, Password: password })
+        });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+         switch (data.userRole) {
+          case 'SV':
+            localStorage.setItem('ID', data.userId);
+            localStorage.setItem('IsLogged', 'true');
+            window.location.href = '../SinhVien/thongtin.html';
+            break;
+          case 'GV':
+            localStorage.setItem('ID', data.userId);
+            localStorage.setItem('IsLogged', 'true');
+            window.location.href = '../GiangVien/thongtin.html';
+            break;
+          case 'GVu':
+            localStorage.setItem('IsLogged', 'true');
+            window.location.href = '../GVU/thongtin.html';
+            break;
+          default:
+            window.location.href = '/';
+        }
+      } else {
+        alert(data.message);
+      }
+      };
+  </script>
+</html>

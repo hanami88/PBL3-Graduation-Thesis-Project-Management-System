@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thêm Sinh Viên</title>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/GVU.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-secret"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="themsv.html" class="detail">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </a>
+        <a href="danhsachsinhvien.html" class="progess">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Danh sách đồ án tốt nghiệp</span>
+        </a>
+        <a href="nhapdiem.html" class="progess">
+          <i class="fa-solid fa-award"></i>
+          <span>Nhập điểm</span>
+        </a>
+        <a href="taikhoangiangvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin giảng viên</span>
+        </a>
+        <a href="taikhoansinhvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin sinh viên</span>
+        </a>
+      </div>
+
+    <div class="right">
+      <div class="hienthi">
+        <div class="hienthi-thongtin">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </div>
+        <button class="btn-out" onclick="dangXuat()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <div class="out">Đăng xuất</div>
+        </button>
+      </div>
+
+      <div class="thongtincanhan">
+        <h1 class="thongtincanhan-tieude">
+          Bạn hãy thêm file Excel thông tin đồ án và thông tin sinh viên theo định dạng dưới đây:
+        </h1>
+        <img src="../picture/SVDAExample.png" alt="Mẫu Excel" class="mau" />
+        <form class="form-excel" onsubmit="event.preventDefault(); uploadExcel();">
+          <label for="excelFile" class="exlb">Chọn file Excel</label>
+          <input type="file" id="excelFile" name="excelFile" accept=".xlsx, .xls" />
+          <button type="submit" class="tailen">Tải lên</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+    function uploadExcel() {
+      const fileInput = document.getElementById("excelFile");
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Vui lòng chọn file Excel!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        const dataRows = rows.slice(1);
+
+        const importList = [];
+
+        dataRows.forEach((row, index) => {
+          if (row.length < 16) return;
+
+          const dto = {
+            mssv: parseInt(row[0]),
+            hoTen: row[1],
+            ngaySinh: new Date(row[2]),
+            khoa: row[3],
+            lopHocPhan: row[4],
+            email: row[5],
+            sdt: row[6]?.toString() ?? "",
+            nienKhoa: parseInt(row[7]),
+
+            tenDoAn: row[8],
+            ngayBatDau: excelDateToJSDate(row[9]),
+            ngayKetThuc: (() => {
+              try {
+                return excelDateToJSDate(row[10]);
+              } catch {
+                return null;
+              }
+            })(),
+            status: row[11],
+            gvhd: row[12],
+            moTa: row[13],
+            ycgv: row[14],
+            namThucHien: parseInt(row[15])
+          };
+
+          importList.push(dto);
+        });
+
+        console.log("Dữ liệu cần gửi:", importList);
+
+        fetch("http://localhost:5266/api/ExcelImport", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(importList)
+        })
+          .then(async (res) => {
+            if (!res.ok) {
+              const errorData = await res.json().catch(() => null);
+              let errorMessage = "Lỗi không xác định";
+              if (errorData) {
+                if (errorData.Errors) {
+                  errorMessage = errorData.Errors.join("\n");
+                } else if (errorData.message) {
+                  errorMessage = errorData.message;
+                } else {
+                  errorMessage = JSON.stringify(errorData);
+                }
+              }
+              throw new Error(errorMessage);
+            }
+            return res.json();
+          })
+          .then((data) => {
+            alert("Tải lên thành công!");
+          })
+          .catch((err) => {
+            console.error("Lỗi chi tiết:", err.message);
+            alert("Lỗi khi gửi dữ liệu:\n" + err.message);
+          });
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+
+    function dangXuat() {
+      localStorage.clear();
+      window.location.href = "../login/index.html";
+    }
+
+    function excelDateToJSDate(serial) {
+      const utc_days = Math.floor(serial - 25569);
+      const utc_value = utc_days * 86400; 
+      const date_info = new Date(utc_value * 1000);
+
+      return date_info.toISOString().split('T')[0];
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/Admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Inter&family=Poppins&family=Roboto&family=Sora&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-secret"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="themsv.html" class="detail">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </a>
+        <a href="danhsachsinhvien.html" class="progess">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Danh sách đồ án tốt nghiệp</span>
+        </a>
+        <a href="nhapdiem.html" class="progess">
+          <i class="fa-solid fa-award"></i>
+          <span>Nhập điểm</span>
+        </a>
+        <a href="taikhoangiangvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin giảng viên</span>
+        </a>
+        <a href="taikhoansinhvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin sinh viên</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Thông tin sinh viên</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="right-container">
+          <div></div>
+          <input
+            type="text"
+            name=""
+            id="search-input"
+            placeholder="Nhập tên sv cần tìm ..."
+          />
+          <div class="thongtinsv-container">
+            <h1 class="thongtinsv gv">Thông tin các tài khoản sinh viên:</h1>
+            <div class="cc1">
+              <div class="cc2">
+                <div class="cc3">Niên khóa: </div>
+                <select style="margin-left:5px" id="Nam">
+                    <option value=""> Chọn Năm </option>
+                    <option value="2025"> 2025 </option>
+                    <option value="2024"> 2024 </option>
+                    <option value="2023"> 2023 </option>
+                    <option value="2022"> 2022 </option>
+                    <option value="2021"> 2021 </option>
+                    <option value="2020"> 2020 </option>
+                    <option value="2019"> 2019 </option>
+                    <option value="2018"> 2018 </option>
+                </select>
+                <i class="fa-solid fa-caret-down"></i>
+                <button id="btn-loc" style="margin-left: 10px; padding: 5px 10px;">
+                Lọc
+                </button>
+              </div>
+            </div>
+            <div id="totalCount" class="tong cc">Tổng : 15</div>
+          </div>
+          <div class="right-information">
+            <div>
+              <div>STT</div>
+              <div>MSSV</div>
+              <div>Tên Sinh Viên</div>
+            </div>
+            <div class="information-container">
+              <div id="studentList">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      async function fetchStudents() {
+        try {
+          const response = await fetch('http://localhost:5266/api/User');
+          if (!response.ok) throw new Error('Không thể lấy dữ liệu sinh viên');
+          const students = await response.json();
+          console.log(students);
+          renderStudents(students);
+        } catch (error) {
+          console.error(error);
+          document.getElementById('studentList').innerHTML = '<div>Không thể tải danh sách sinh viên.</div>';
+        }
+      }
+
+      function renderStudents(students) {
+        const container = document.getElementById('studentList');
+        const totalCount = document.getElementById('totalCount');
+        container.innerHTML = ''; 
+        totalCount.textContent = `Tổng : ${students.length}`;
+
+        students.forEach((sv, index) => {
+          const div = document.createElement('div');
+          div.classList.add('thanhphan');
+          div.innerHTML = `
+            <div>${index + 1}</div>
+            <div>${sv.mssv}</div>
+            <div class="tensinhvien">${sv.hoTen}</div>
+            <a href="./chitietdoan.html?mssv=${sv.mssv}">Đồ án</a>
+            <a href="./chitietsinhvien.html?mssv=${sv.mssv}">Chỉnh sửa</a>
+          `;
+          div.setAttribute('data-mssv', sv.mssv);
+          container.appendChild(div);
+        });
+      }
+
+      fetchStudents();
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+
+      function removeVietnameseTones(str) {
+        return str
+          .normalize("NFD")                      
+          .replace(/[\u0300-\u036f]/g, "")      
+          .replace(/đ/g, "d")           
+          .replace(/Đ/g, "D")
+          .replace(/\s+/g, " ")       
+          .trim();                    
+      }
+
+      document.getElementById("search-input").addEventListener("input", function () {
+        const keyword = removeVietnameseTones(this.value.toLowerCase());
+        const items = document.querySelectorAll("#studentList .thanhphan");
+
+        items.forEach((item) => {
+          const tenDoAn = removeVietnameseTones(item.querySelector(".tensinhvien").textContent.toLowerCase());
+          if (tenDoAn.includes(keyword)) {
+            item.style.display = "";
+            console.log("Gõ vào:", this.value, "=> Sau khi bỏ dấu:", keyword);
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+
+      document.getElementById("btn-loc").addEventListener("click", function () {
+        const nam = document.getElementById("Nam").value;
+
+        fetch("http://localhost:5266/api/User")
+            .then((response) => response.json())
+            .then((data) => {
+                const selectedYear = document.getElementById("Nam").value;
+
+                const filtered = data.filter(item => {
+                    const yearMatch = !selectedYear || item.nienKhoa.toString() === selectedYear;
+                    return yearMatch;
+                });
+
+                const container = document.querySelector(".information-container > div");
+                container.innerHTML = "";
+
+                filtered.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.classList.add('thanhphan');
+                    div.innerHTML = `
+                      <div>${index + 1}</div>
+                      <div>${item.mssv}</div>
+                      <div class="tensinhvien">${item.hoTen}</div>
+                      <a href="./chitietdoan.html?mssv=${item.mssv}">Đồ án</a>
+                      <a href="./chitietsinhvien.html?mssv=${item.mssv}">Chỉnh sửa</a>
+                    `;
+                    container.appendChild(div);
+                });
+
+                document.querySelector(".tong").textContent = `Tổng : ${filtered.length}`;
+            })
+            .catch((error) => {
+                console.error("Lỗi khi lọc dữ liệu:", error);
+            });
+      });
+
+      let selectedDiv = null;
+
+      document.addEventListener("click", function (e) {
+        const target = e.target.closest(".thanhphan");
+        if (!target) return;
+
+        if (selectedDiv) selectedDiv.classList.remove("selected");
+        selectedDiv = target;
+        selectedDiv.classList.add("selected");
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Delete" && selectedDiv) {
+          const mssv = selectedDiv.getAttribute("data-mssv");
+          console.log("MSSV cần xoá:", mssv);
+
+          if (confirm("Bạn có chắc muốn xoá sinh viên này không?")) {
+            fetch("http://localhost:5266/api/Account/DeleteStudentAndAccount", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ mssv: parseInt(mssv) })
+            })
+            .then(response => {
+              if (!response.ok) throw new Error("Xoá thất bại");
+              return response.text();
+            })
+            .then(msg => {
+              alert("Xoá thành công");
+              selectedDiv.remove();
+              selectedDiv = null;
+            })
+            .catch(err => {
+              console.error("Lỗi:", err);
+              alert("Xoá thất bại");
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

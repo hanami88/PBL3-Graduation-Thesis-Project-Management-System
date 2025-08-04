@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/Admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Inter&family=Poppins&family=Roboto&family=Sora&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-tie"></i>
+          <span>Admin</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="sinhvien.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản sinh viên</span>
+        </a>
+        <a href="giangvien.html" class="detail">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản giảng viên</span>
+        </a>
+        <a href="giaovu.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản giáo vụ</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Tài khoản sinh viên</span>
+          </div>
+          <button class="btn-out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="right-container">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Nhập tên sv cần tìm ..."
+          />
+          <div class="thongtinsv-container">
+            <h1 class="thongtinsv">Thông tin các tài khoản sinh viên:</h1>
+            <div class="tong" id="totalCount">Tổng : 0</div>
+          </div>
+          <div class="right-information">
+            <div>
+              <div>STT</div>
+              <div>MSSV</div>
+              <div>Tên Sinh Viên</div>
+            </div>
+            <div class="information-container">
+              <div id="studentList">
+                <!-- Danh sách sinh viên sẽ được render ở đây -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      async function fetchStudents() {
+        try {
+          const response = await fetch('http://localhost:5266/api/User');
+          if (!response.ok) throw new Error('Không thể lấy dữ liệu sinh viên');
+          const students = await response.json();
+          console.log(students);
+          renderStudents(students);
+        } catch (error) {
+          console.error(error);
+          document.getElementById('studentList').innerHTML = '<div>Không thể tải danh sách sinh viên.</div>';
+        }
+      }
+
+      function renderStudents(students) {
+        const container = document.getElementById('studentList');
+        const totalCount = document.getElementById('totalCount');
+        container.innerHTML = ''; 
+        totalCount.textContent = `Tổng : ${students.length}`;
+
+        students.forEach((sv, index) => {
+          const div = document.createElement('div');
+          div.classList.add('thanhphan');
+          div.innerHTML = `
+            <div>${index + 1}</div>
+            <div>${sv.mssv}</div>
+            <div>${sv.hoTen}</div>
+            <a href="./chitietsinhvien.html?mssv=${encodeURIComponent(sv.ids)}">Chỉnh sửa</a>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      document.getElementById('searchInput').addEventListener('input', function () {
+        const searchText = this.value.toLowerCase();
+        const allStudents = Array.from(document.querySelectorAll('#studentList .thanhphan'));
+        allStudents.forEach(div => {
+          const name = div.children[2].textContent.toLowerCase();
+          if (name.includes(searchText)) div.style.display = '';
+          else div.style.display = 'none';
+        });
+      });
+
+      fetchStudents();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/Admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý giảng viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-tie"></i>
+          <span>Admin</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="sinhvien.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản sinh viên</span>
+        </a>
+        <a href="giangvien.html" class="detail">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản giảng viên</span>
+        </a>
+        <a href="giaovu.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Tài khoản giáo vụ</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Tài khoản giảng viên</span>
+          </div>
+          <button class="btn-out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+
+        <div class="right-container">
+          <input
+            type="text"
+            placeholder="Nhập tên giảng viên cần tìm ..."
+            oninput="filterGiangVien(this.value)"
+          />
+          <div class="thongtinsv-container">
+            <h1 class="thongtinsv">Thông tin các tài khoản giảng viên:</h1>
+            <div class="tong" id="tongGiangVien">Tổng: 0</div>
+          </div>
+
+          <div class="right-information">
+            <div>
+              <div>STT</div>
+              <div>MSGV</div>
+              <div>Tên Giảng Viên</div>
+            </div>
+            <div class="information-container" id="giangvienContainer">
+              <!-- Dữ liệu giảng viên sẽ được load tại đây -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let danhSachGiangVien = [];
+
+      function renderGiangVien(data) {
+        const container = document.getElementById("giangvienContainer");
+        container.innerHTML = "";
+        data.forEach((gv, index) => {
+          const div = document.createElement("div");
+          div.className = "thanhphan";
+          div.innerHTML = `
+            <div>${index + 1}</div>
+            <div>${gv.maGiangVien || "N/A"}</div>
+            <div>${gv.hoTen || "Chưa có tên"}</div>
+            <a href="./chitietgiangvien.html?id=${gv.id}">Chỉnh sửa</a>
+          `;
+          container.appendChild(div);
+        });
+        document.getElementById("tongGiangVien").textContent = "Tổng: " + data.length;
+      }
+
+      function filterGiangVien(keyword) {
+        const filtered = danhSachGiangVien.filter(gv =>
+          gv.hoTen?.toLowerCase().includes(keyword.toLowerCase())
+        );
+        renderGiangVien(filtered);
+      }
+
+      window.onload = function () {
+        fetch("http://localhost:5266/api/GiangVien")
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Lỗi khi lấy dữ liệu giảng viên: " + response.status);
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Nếu backend trả luôn danh sách giảng viên, không cần filter role nữa
+            danhSachGiangVien = data;
+            renderGiangVien(danhSachGiangVien);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
+    </script>
+  </body>
+</html>

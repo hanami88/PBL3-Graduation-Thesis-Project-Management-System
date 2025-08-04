@@ -1,0 +1,865 @@
+html {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  position: fixed;
+}
+@media (min-width: 2561px) {
+  html {
+    font-size: 75%; /* 1rem = 12px → phóng to nhẹ */
+  }
+}
+
+/* === Laptop lớn, iMac: 1441px - 2560px === */
+@media (min-width: 1441px) and (max-width: 2560px) {
+  html {
+    font-size: 62.5%; /* 1rem = 10px */
+  }
+}
+
+/* === Laptop phổ thông: 1281px - 1440px === */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* === Tablet ngang / Laptop nhỏ: 1025px - 1280px === */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  html {
+    font-size: 56.25%; /* 1rem = 9px */
+  }
+}
+
+/* === Tablet dọc / Mobile lớn: 769px - 1024px === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 50%; /* 1rem = 8px */
+  }
+}
+
+/* === Mobile phổ thông: 577px - 768px === */
+@media (min-width: 577px) and (max-width: 768px) {
+  html {
+    font-size: 46.875%; /* 1rem = 7.5px */
+  }
+}
+
+/* === Mobile nhỏ: ≤ 576px === */
+@media (max-width: 576px) {
+  html {
+    font-size: 43.75%; /* 1rem = 7px */
+  }
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.left {
+  height: 100%;
+  background-color: #1e3050;
+  width: 20vw;
+  border-radius: 0rem 1rem 1rem 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gachngang {
+  width: 270rem;
+  height: 0.2rem;
+  background-color: #1e3050;
+}
+.fa-solid {
+  color: white;
+  font-size: 3.9rem;
+  margin-right: 1.5rem;
+  width: 4rem;
+  margin-left: 1rem;
+}
+span {
+  font-size: 1.9rem;
+  color: white;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+.gachngang {
+  margin-bottom: 2rem;
+}
+.xinchao {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  margin-bottom: 2rem;
+}
+.gachngang2 {
+  width: 28.7rem;
+  height: 0.2rem;
+  background-color: white;
+  margin-bottom: 2rem;
+}
+.detail,
+.progess,
+.score,
+.info {
+  display: flex;
+  align-items: center;
+  width: 17vw;
+  height: 7vh;
+  margin-bottom: 5rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    background-color: #0054e6;
+  }
+}
+.hienthi {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.hienthi-thongtin {
+  display: flex;
+  align-items: center;
+}
+.hienthi-thongtin > :nth-child(1) {
+  color: #1e3050;
+}
+.hienthi-thongtin > :nth-child(2) {
+  color: #1e3050;
+}
+.btn-out {
+  cursor: pointer;
+  width: 15rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border: none;
+  background-color: #1e3050;
+  &:hover {
+    background-color: #0054e6;
+  }
+  font-size: 1.6rem;
+}
+.fa-right-from-bracket {
+  font-size: 2.5rem;
+}
+.out {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+  margin-right: 1rem;
+  width: 15rem;
+}
+
+.thongtincanhan {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100rem;
+}
+.thongtincanhan.chitiet {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100rem;
+}
+.picture-box {
+  width: 14rem;
+  height: 17.5rem;
+  border: 0.2rem solid black;
+}
+.picture {
+  width: 14rem;
+  height: 17.5rem;
+}
+.thongtin1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18rem;
+}
+
+.special {
+  background-color: white;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 1.2rem 0rem 0rem 1rem;
+  color: white;
+}
+.thongtincanhan {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100rem;
+}
+.thongtincanhan1 {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rem;
+}
+.thongtincanhan-gvu {
+  color: black;
+  font-size: 6rem;
+  font-weight: 400;
+  margin-top: 4rem;
+}
+.change-password {
+  margin-top: 4rem;
+  width: 21rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.formchange-passwork {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formchange-passwork input {
+  width: 60rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  border: 0.15rem solid #1e3050;
+  padding-left: 2rem;
+}
+.okpassword {
+  width: 13rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #1e3050;
+  color: white;
+  margin-top: 0rem;
+  &:hover {
+    background-color: #0054e6;
+  }
+}
+.formchange-passwork.hidden {
+  display: none;
+}
+.change-password.on {
+  background-color: #0054e6;
+  color: white;
+}
+
+.right-information {
+  width: 100rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 95rem;
+  border: 0.1rem solid black;
+  border-radius: 1.5rem;
+  height: 58vh;
+}
+.right-container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right-container > :nth-child(2) {
+  width: 95rem;
+  height: 5rem;
+  border-radius: 10px;
+  border: 0.15rem solid black;
+  font-size: 1.7rem;
+  padding-left: 2rem;
+  font-weight: 600;
+}
+
+.right-container > :nth-child(1) {
+  color: black;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.cc1 {
+  display: flex;
+  margin-left: 2rem;
+}
+.cc3 {
+  font-size: 2rem;
+}
+.cc2 {
+  display: flex;
+  align-items: center;
+  margin-right: 30rem;
+}
+.cc4 {
+  width: 20rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  border: 0.2rem solid black;
+  font-size: 1.7rem;
+}
+.thongtinsv-container {
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  width: 90rem;
+  justify-content: end;
+  margin-right: 10rem;
+  flex-direction: column;
+}
+.thongtinsv {
+  font-size: 2rem;
+  color: black;
+  margin-right: 15rem;
+}
+.thongtinsv.gv {
+  font-size: 2rem;
+  color: black;
+  margin-right: -11rem;
+}
+.thongtinsv1 {
+  font-size: 2rem;
+  color: black;
+  margin-left: 8rem;
+}
+.thongtinsv.cc {
+  font-size: 2rem;
+  color: black;
+  margin-right: -9rem;
+}
+.tong.cc {
+  font-size: 1.7rem;
+  color: black;
+  margin-top: 1rem;
+  margin-left: 80rem;
+}
+
+.tong {
+  font-size: 1.7rem;
+  color: black;
+  margin-top: 5rem;
+}
+
+.information-container {
+  height: 46rem;
+  overflow: scroll;
+  margin-top: 4rem;
+  border-radius: 1rem;
+  overflow-x: hidden;
+}
+.right-information > :nth-child(1) {
+  display: flex;
+  align-items: center;
+  width: 94rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  background-color: white;
+  position: fixed;
+  height: 4rem;
+  border-radius: 1rem;
+}
+#p1 {
+  margin-left: 10rem;
+}
+#p2 {
+  margin-left: 15rem;
+}
+#p3 {
+  margin-left: 11rem;
+}
+
+.right-information > :nth-child(1) > :nth-child(1) {
+  margin-left: 4rem;
+}
+.right-information > :nth-child(1) > :nth-child(2) {
+  margin-left: 14rem;
+}
+.right-information > :nth-child(1) > :nth-child(3) {
+  margin-left: 24rem;
+}
+
+.thanhphan {
+  margin-bottom: 0.7rem;
+  display: flex;
+  width: 90rem;
+  border: 0.1rem solid #d8d8d8;
+  border-radius: 1rem;
+  height: 3.8rem;
+  background-color: #f8f6f6;
+  font-size: 1.6rem;
+  font-weight: 550;
+  align-items: center;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #e7e7e7;
+
+    border: 0.1rem solid #000000;
+  }
+}
+.thanhphan1 {
+  margin-bottom: 0.7rem;
+  display: flex;
+  width: 90rem;
+  border: 0.1rem solid #d8d8d8;
+  border-radius: 1rem;
+  height: 3.8rem;
+  background-color: #f8f6f6;
+  font-size: 1.6rem;
+  font-weight: 550;
+  align-items: center;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #e7e7e7;
+
+    border: 0.1rem solid #000000;
+  }
+}
+.thanhphan > :nth-child(1) {
+  width: 5rem;
+  margin-left: 1rem;
+  text-align: center;
+}
+.thanhphan > :nth-child(2) {
+  width: 27rem;
+  margin-left: 3rem;
+  text-align: center;
+}
+.thanhphan > :nth-child(3) {
+  width: 27rem;
+  margin-left: 7rem;
+  text-align: center;
+}
+.thanhphan > :nth-child(4) {
+  width: 10rem;
+  margin-left: 3rem;
+  text-align: center;
+}
+.thanhphan > :nth-child(5) {
+  width: 10rem;
+  margin-left: 3rem;
+  text-align: center;
+}
+.thanhphan1 > :nth-child(1) {
+  width: 3rem;
+  margin-left: 2rem;
+  text-align: center;
+}
+.thanhphan1 > :nth-child(2) {
+  width: 20rem;
+  margin-left: 4rem;
+  text-align: center;
+}
+.thanhphan1 > :nth-child(3) {
+  width: 20rem;
+  margin-left: 3rem;
+  text-align: center;
+}
+.thanhphan1 > :nth-child(4) {
+  width: 20rem;
+  margin-left: 4rem;
+  text-align: center;
+}
+.thanhphan1 > :nth-child(5) {
+  width: 8rem;
+  margin-left: 5rem;
+  text-align: center;
+}
+.thanhphan1 > a {
+  color: #004aad;
+  font-style: italic;
+  &:hover {
+    color: #006eff;
+  }
+  margin-left: 7rem;
+}
+.thanhphan > a {
+  color: #004aad;
+  font-style: italic;
+  &:hover {
+    color: #006eff;
+  }
+  margin-left: 7rem;
+}
+
+.chitietsinhvien {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70rem;
+  margin-bottom: 5rem;
+}
+.chitiet-thongtinsv {
+  margin-top: 2rem;
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+.right-container-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  margin-top: 5rem;
+}
+.right-container-detail {
+  display: flex;
+  align-items: center;
+}
+.right-container-detail > :nth-child(1) {
+  font-size: 17px;
+  color: black;
+  font-weight: 500;
+  margin-right: 2rem;
+}
+.right-container-detail > :nth-child(2) {
+  width: 39rem;
+  height: 19rem;
+  border-radius: 0.8rem;
+  border: 0.15rem solid black;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+.right-container-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 27rem;
+}
+
+.gachchan {
+  margin-top: 3.5rem;
+  width: 60vw;
+  height: 0.1rem;
+  background-color: #a1aeb5;
+}
+.text-thongtindoan {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-top: 3rem;
+}
+.right-container1 {
+  width: 90%;
+  height: 85%;
+  margin-top: -3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thongtin1-box2 > :nth-child(1) {
+  font-size: 1.6rem;
+  margin-right: 1rem;
+}
+.thongtin1-box2 > select {
+  width: 19rem;
+  height: 4rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #999;
+  border-radius: 8px;
+  font-size: 1.7rem;
+  outline: none;
+  font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-left: 1.5rem;
+}
+.fa-caret-down {
+  color: #1e3050;
+  position: absolute;
+  top: 0.6rem;
+  right: 21.3rem;
+  font-size: 2.5rem;
+}
+.right-container-detail {
+  display: flex;
+  align-items: center;
+}
+.right-container-detail > :nth-child(1) {
+  font-size: 17px;
+  color: black;
+  font-weight: 500;
+  margin-right: 20px;
+}
+.right-container-detail > :nth-child(2) {
+  width: 390px;
+  height: 190px;
+  border-radius: 8px;
+  border: 1.5px solid black;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-left: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.right-container-cmt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right-container-cmt > :nth-child(1) {
+  font-size: 18px;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.right-container-cmt > :nth-child(2) {
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-radius: 8px;
+  border: 1.5px solid black;
+  height: 270px;
+  width: 1000px;
+  font-family: "Roboto", sans-serif;
+}
+.right-container-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin-bottom: 5rem;
+}
+.thongtin1-box1 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.thongtin1-input {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.thongtin1-box2 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+.right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100rem;
+  margin-top: 4rem;
+}
+.right-top-left > :nth-child(1),
+.right-top-right > :nth-child(1) {
+  margin-bottom: 3rem;
+  font-size: 1.8rem;
+  color: black;
+  margin-top: 2rem;
+}
+.right-top-left,
+.right-top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.thongtin1-box1 > :nth-child(1) {
+  font-size: 1.6rem;
+  margin-right: 1rem;
+}
+.thongtin1-box1 > :nth-child(2) {
+  width: 19.6rem;
+  height: 2.8rem;
+  background-color: #e1e1e1;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 1.2rem 0rem 0rem 1rem;
+}
+.thongtin1-box1 > :nth-child(3) {
+  font-size: 1.6rem;
+  margin-left: 1rem;
+  width: 23rem;
+}
+.thongtin1-box1 > div:nth-child(2) input {
+  width: 100%;     
+  height: 100%; 
+  font-size: 1.6rem;
+  font-weight: 600;
+  background-color: transparent; 
+  border: none;
+  outline: none;
+  padding-left: 1rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+}
+.thongtin1-box2 > :nth-child(4) {
+  font-size: 1.7rem;
+  margin-left: 1rem;
+  width: 23rem;
+}
+.right-container-bot {
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.right-container-bot > :nth-child(1) {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+}
+.bot-box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  margin-right: 2rem;
+}
+.bot-box1 > :nth-child(1) {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+.bot-box1 > :nth-child(2) {
+  width: 70rem;
+  height: 4rem;
+  border-radius: 1rem;
+  border: 0.15rem solid black;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: "Roboto";
+  font-size: 1.7rem;
+}
+
+.luachon {
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.luachon > :nth-child(2) {
+  width: 13rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  border: 0.2rem solid #1e3050;
+  text-align: center;
+}
+.luachon1 {
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.luachon1 > :nth-child(2) {
+  width: 22rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  border: 0.2rem solid #1e3050;
+  text-align: center;
+}
+.container-luachon {
+  display: flex;
+  justify-content: space-between;
+  width: 90rem;
+  margin-top: 2rem;
+}
+.CreateAccount {
+  position: fixed;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background-color: #ffffff;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  z-index: 9999;
+  width: 400px;
+  height: 175px;
+  max-width: 90%;
+}
+
+.change-password {
+  margin-top: 4rem;
+  width: 21rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.create-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.create-account input {
+  width: 42rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  border: 0.15rem solid #1e3050;
+  padding-left: 2rem;
+}
+.selected {
+  background-color: #f0f0f0;
+  border: 2px solid #4CAF50;
+}

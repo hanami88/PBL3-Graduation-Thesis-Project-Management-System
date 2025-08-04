@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/GV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-secret"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="themsv.html" class="detail">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </a>
+        <a href="danhsachsinhvien.html" class="progess">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Danh sách đồ án tốt nghiệp</span>
+        </a>
+        <a href="nhapdiem.html" class="progess">
+          <i class="fa-solid fa-award"></i>
+          <span>Nhập điểm</span>
+        </a>
+        <a href="taikhoangiangvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin giảng viên</span>
+        </a>
+        <a href="taikhoansinhvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin sinh viên</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-users"></i>
+            <span>Quản lý sinh viên hướng dẫn</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+
+        <div class="chitietsinhvien">
+          <div class="gachchan"></div>
+
+          <div class="text-thongtindoan">Thông Tin Đồ Án</div>
+          <div class="thongtindoan">
+            <div class="right-container-top">
+              <div class="right-container-info">
+                <div class="thongtin1-box1">
+                  <div>ID đồ án :</div>
+                  <div><input type="text" id="daId"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Tên đồ án :</div>
+                  <div><input type="text" id="daTen"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Ngày bắt đầu :</div>
+                  <div><input type="text" id="daNgayBatDau"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Ngày kết thúc :</div>
+                  <div><input type="text" id="daNgayKetThuc"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Trạng thái :</div>
+                  <div><input type="text" id="daStatus"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>GV Hướng Dẫn :</div>
+                  <div><input type="text" id="daGVHD"></div>
+                </div>
+              </div>
+              <div class="right-container-detail">
+                <h1>Mô tả :</h1>
+                <textarea
+                  placeholder="Thông tin mô tả của đồ án ..."
+                  id="daMoTa"
+                  readonly
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      async function fetchStudentAndProject(mssv) {
+        try {
+          const response = await fetch(
+            `http://localhost:5266/api/DoAn/GetDoAn?userId=${mssv}`
+          );
+          if (!response.ok) throw new Error("Không tìm thấy dữ liệu hoặc lỗi server");
+
+          const data = await response.json();
+          console.log("Dữ liệu nhận được:", data);
+          document.getElementById("daId").value = data.id || "...";
+          document.getElementById("daTen").value = data.ten || "...";
+          document.getElementById("daNgayBatDau").value = data.start || "...";
+          document.getElementById("daNgayKetThuc").value = data.end || "...";
+          document.getElementById("daStatus").value = data.status || "...";
+          document.getElementById("daGVHD").value = data.gvhd || data.doAn.GVHD || "...";
+          document.getElementById("daMoTa").value = data.detail || "";
+
+        } catch (error) {
+          alert(error.message);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mssv = urlParams.get('mssv');
+        console.log("DoAnId lấy từ URL:", mssv);
+        if (mssv) {
+          fetchStudentAndProject(mssv);
+        } else {
+          alert("Không tìm thấy svId trong URL");
+        }
+      });
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+
+      async function capNhatDoAn() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mssv = urlParams.get('mssv');
+        if (!mssv) {
+          alert("Không tìm thấy svId trong URL");
+          return;
+        }
+
+        const updatedDoAn = {
+          Id: document.getElementById("daId").value,
+          Ten: document.getElementById("daTen").value,
+          NgayBatDau: document.getElementById("daNgayBatDau").value,
+          NgayKetThuc: document.getElementById("daNgayKetThuc").value,
+          Status: document.getElementById("daStatus").value,
+          GVHD: document.getElementById("daGVHD").value,
+          MoTa: document.getElementById("daMoTa").value,
+        };
+
+        try {
+          const response = await fetch(`http://localhost:5266/api/DoAn/UpdateDoAn/${mssv}`, {
+            method: 'PUT',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedDoAn),
+          });
+
+          if (!response.ok) throw new Error("Lỗi khi cập nhật đồ án");
+
+          alert("Cập nhật đồ án thành công!");
+        } catch (error) {
+          console.error("Lỗi:", error);
+          alert("Không thể cập nhật thông tin đồ án.");
+        }
+      }
+
+      document.querySelectorAll(".thongtindoan input").forEach((input) => {
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            capNhatDoAn();
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

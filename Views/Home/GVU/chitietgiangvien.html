@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/Admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông Tin Sinh Viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-secret"></i>
+          <span>Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="themsv.html" class="detail">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Thêm sinh viên làm đồ án tốt nghiệp</span>
+        </a>
+        <a href="danhsachsinhvien.html" class="progess">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Danh sách đồ án tốt nghiệp</span>
+        </a>
+        <a href="nhapdiem.html" class="progess">
+          <i class="fa-solid fa-award"></i>
+          <span>Nhập điểm</span>
+        </a>
+        <a href="taikhoangiangvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin giảng viên</span>
+        </a>
+        <a href="taikhoansinhvien.html" class="progess">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin sinh viên</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Thông tin cá nhân</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="thongtincanhan">
+          <div class="picture-box">
+            <img src="" alt="" class="picture" />
+          </div>
+          <div class="thongtin1">
+            <div class="thongtin1-box1">
+              <div>Họ và tên :</div>
+              <div><input type="text" id="hoTen" /></div>
+            </div>
+            <div class="thongtin1-box1">
+              <div>Ngày sinh :</div>
+              <div><input type="date" id="ngaySinh" /></div>
+            </div>
+            <div class="thongtin1-box1">
+              <div>Khoa :</div>
+              <div><input type="text" id="khoa" /></div>
+            </div>
+          </div>
+          <div class="thongtin1">
+            <div class="thongtin1-box1">
+              <div>ID giảng viên :</div>
+              <div><input type="text" id="maGiangVien" /></div>
+            </div>
+            <div class="thongtin1-box1">
+              <div>Email :</div>
+              <div><input type="text" id="email" readonly /></div>
+            </div>
+            <div class="thongtin1-box1">
+              <div>SDT :</div>
+              <div><input type="text" id="soDienThoai" /></div>
+            </div>
+          </div>
+        </div>
+        <button style="margin-top: 50px;" class="okpassword" onclick="ResetPass()">Reset Password</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const giangVienId = urlParams.get("id");
+
+        if (!giangVienId) {
+          alert("Không tìm thấy ID giảng viên trong URL.");
+          return;
+        }
+
+        fetch(
+          `http://localhost:5266/api/GiangVien/GetGiangVienByMSGV?msgv=${giangVienId}`
+        )
+          .then((response) => {
+            if (!response.ok) throw new Error("Lỗi khi gọi API");
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Dữ liệu nhận được:", data);
+            document.getElementById("hoTen").value = data.hoTen || "";
+            document.getElementById("ngaySinh").value = data.ngaySinh
+            ? new Date(data.ngaySinh).toISOString().split('T')[0]
+            : "";
+            document.getElementById("khoa").value = data.khoa || "";
+            document.getElementById("maGiangVien").value = data.mgv || "";
+            document.getElementById("soDienThoai").value = data.sdt || "";
+            document.getElementById("email").value = "null";
+
+            if (data.anhDaiDien) {
+              document.querySelector(".picture").src = data.anhDaiDien;
+            }
+          })
+          .catch((error) => {
+            console.error("Lỗi:", error);
+            alert("Không thể tải thông tin giảng viên.");
+          });
+      });
+
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+
+      function capNhatGiangVien() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mgv = urlParams.get("id"); // Lấy mã giảng viên từ URL
+        if (!mgv) {
+          alert("Không tìm thấy ID giảng viên trong URL.");
+          return;
+        }
+
+        const hoTen = document.getElementById("hoTen").value;
+        const ngaySinh = document.getElementById("ngaySinh").value;
+        const khoa = document.getElementById("khoa").value;
+        const soDienThoai = document.getElementById("soDienThoai").value;
+
+        // Tạo object dữ liệu đúng tên biến và dùng mgv đã lấy
+        const updatedGiangVien = {
+          MaGiangVien: parseInt(mgv),
+          HoTen: hoTen,
+          NgaySinh: new Date(ngaySinh).toISOString(),
+          Khoa: khoa,
+          SoDienThoai: soDienThoai
+        };
+
+        console.log("Dữ liệu gửi lên:", updatedGiangVien);
+
+        fetch(`http://localhost:5266/api/GiangVien/UpdateGiangVien/${mgv}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedGiangVien), // Dùng đúng biến ở đây
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error("Lỗi khi cập nhật giảng viên");
+            alert("Cập nhật thành công!");
+          })
+          .catch((error) => {
+            console.error("Lỗi:", error);
+            alert("Không thể cập nhật thông tin giảng viên.");
+          });
+      }
+
+      document.querySelectorAll(".thongtincanhan input").forEach((input) => {
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            capNhatGiangVien();
+          }
+        });
+      });
+
+      function ResetPass() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const giangVienId = urlParams.get("id");
+
+        fetch(`http://localhost:5266/api/Account/reset-password?id=${giangVienId}`, {
+            method: "POST"
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Reset failed.");
+            return response.text();
+        })
+        .then(message => {
+            alert(message);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Không tìm thấy tài khoản.");
+        });
+      }
+    </script>
+  </body>
+</html>

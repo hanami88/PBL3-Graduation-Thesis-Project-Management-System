@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/SV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Đồ Án</title>
+    <style>
+      /* Style dòng thời gian mờ nhỏ và canh phải */
+      .time-info {
+        color: gray;
+        font-size: 0.9em;
+        text-align: right;
+      }
+      .status-info {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user"></i>
+          <span id="user-name">Mai Anh Luan</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="chitiet.html" class="detail">
+          <i class="fa-solid fa-code-branch"></i>
+          <span>Chi tiết đồ án </span>
+        </a>
+        <a href="tiendo.html" class="progess">
+          <i class="fa-solid fa-bars-progress"></i>
+          <span>Tiến độ đồ án</span>
+        </a>
+        <a href="diemso.html" class="score">
+          <i class="fa-solid fa-award"></i>
+          <span>Điểm Số</span>
+        </a>
+      </div>
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span>Tiến độ đồ án</span>
+          </div>
+          <button class="btn-out" onclick="dangXuat()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+        <div class="right-container1">
+          <div class="right-container-top">
+            <div class="right-top-left">
+              <h1>Thông tin đồ án</h1>
+              <div>
+                <div class="thongtin1-box1">
+                  <div>Tên đồ án :</div>
+                  <div id="info-da-name">Website Quản Lý DATN</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>ID đồ án :</div>
+                  <div id="info-da-id">1234564AS</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Trạng thái :</div>
+                  <div id="info-da-status">Đang thực hiện</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>GV Hướng Dẫn :</div>
+                  <div id="info-da-gvhd">Đỗ Thị Tuyết Hoa</div>
+                </div>
+              </div>
+            </div>
+            <div class="right-top-right">
+              <h1>Cập nhật tiến độ</h1>
+              <div>
+                <div class="thongtin1-box1">
+                  <div>Lần 1 :</div>
+                  <div class="status-info">Chưa cập nhật</div>
+                  <div class="time-info"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Lần 2 :</div>
+                  <div class="status-info">Chưa cập nhật</div>
+                  <div class="time-info"></div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Lần 3 :</div>
+                  <div class="status-info">Chưa cập nhật</div>
+                  <div class="time-info"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-container-bot">
+            <div>Mô tả tiến độ</div>
+            <div class="bot-box1">
+              <div>Lần 1 :</div>
+              <textarea
+                name=""
+                id=""
+                placeholder="Nhập mô tả tiến độ..."
+              ></textarea>
+            </div>
+            <div class="bot-box1">
+              <div>Lần 2 :</div>
+              <textarea
+                name=""
+                id=""
+                placeholder="Nhập mô tả tiến độ..."
+              ></textarea>
+            </div>
+            <div class="bot-box1">
+              <div>Lần 3 :</div>
+              <textarea
+                name=""
+                id=""
+                placeholder="Nhập mô tả tiến độ..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function formatDateTime(datetimeStr) {
+        if (!datetimeStr) return "";
+        const date = new Date(datetimeStr);
+        if (isNaN(date)) return "";
+        const d = date.toLocaleDateString("vi-VN");
+        const t = date.toLocaleTimeString("vi-VN", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        return `Vào lúc: ${d} ${t}`;
+      }
+
+      function loadTienDo(doAnId) {
+        fetch(
+          `http://localhost:5266/api/TienDo/GetTienDoByDoAnId?doAnId=${doAnId}`
+        )
+          .then((response) => response.json())
+          .then((tiendoList) => {
+            console.log("Tiến độ:", tiendoList);
+
+            if (!Array.isArray(tiendoList)) {
+              console.error("Dữ liệu trả về không phải mảng");
+              return;
+            }
+
+            const rightTopRightDivs = document.querySelectorAll(
+              ".right-top-right .thongtin1-box1"
+            );
+            const descriptionTextareas = document.querySelectorAll(
+              ".right-container-bot textarea"
+            );
+
+            if (rightTopRightDivs.length < 3 || descriptionTextareas.length < 3) {
+              console.error("Không tìm thấy đủ phần tử giao diện để cập nhật tiến độ");
+              return;
+            }
+
+            tiendoList.forEach((td) => {
+              const index = td.thuTu - 1;
+              if (index < 0 || index > 2) return;
+
+              rightTopRightDivs[index].querySelector(".status-info").textContent =
+                td.status === "YES"
+                  ? "Đã hoàn thành"
+                  : td.status === "NO"
+                  ? "Đang thực hiện"
+                  : "Không rõ trạng thái";
+
+              rightTopRightDivs[index].querySelector(".time-info").textContent =
+                formatDateTime(td.ngayCapNhat);
+
+              descriptionTextareas[index].value = td.noiDung || "";
+            });
+          })
+          .catch((err) => {
+            console.error("Lỗi load tiến độ:", err);
+          });
+      }
+
+      window.onload = () => {
+        // Lấy dữ liệu từ localStorage
+        const doAnId = localStorage.getItem("DoAnId") || "1234564AS";
+        const doAnName = localStorage.getItem("DoAnName") || "Website Quản Lý DATN";
+        const doAnStatus = localStorage.getItem("DoAnStatus") || "Đang thực hiện";
+        const doAnGVHD = localStorage.getItem("DoAnGVHD") || "Đỗ Thị Tuyết Hoa";
+
+        // Cập nhật 4 ô Thông tin đồ án ở bên phải
+        document.getElementById("info-da-name").textContent = doAnName;
+        document.getElementById("info-da-id").textContent = doAnId;
+        document.getElementById("info-da-status").textContent = doAnStatus;
+        document.getElementById("info-da-gvhd").textContent = doAnGVHD;
+
+        // Load tiến độ
+        if (doAnId) {
+          loadTienDo(doAnId);
+        } else {
+          console.warn("Không tìm thấy DoAnId trong localStorage");
+        }
+      };
+      function dangXuat() {
+        localStorage.clear();
+        window.location.href = "../login/index.html";
+      }
+    </script>
+  </body>
+</html>

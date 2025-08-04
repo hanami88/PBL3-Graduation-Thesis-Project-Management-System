@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/GV.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <h1>Quản lý chung</h1>
+        <div class="gachngang"></div>
+        <div class="xinchao">
+          <i class="fa-solid fa-user-tie"></i>
+          <span>Mai Anh Luân</span>
+        </div>
+        <div class="gachngang2"></div>
+        <a href="thongtin.html" class="info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+        <a href="quanlydoan.html" class="detail">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>Quản lý đồ án hướng dẫn</span>
+        </a>
+        <a href="lichsu.html" class="progess">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Lịch sử hướng dẫn</span>
+        </a>
+      </div>
+
+      <div class="right">
+        <div class="hienthi">
+          <div class="hienthi-thongtin">
+            <i class="fa-solid fa-users"></i>
+            <span>Quản lý sinh viên hướng dẫn</span>
+          </div>
+          <button class="btn-out" onclick="LogOut()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="out">Đăng xuất</div>
+          </button>
+        </div>
+
+        <div class="chitietsinhvien">
+          <div class="chitiet-thongtinsv">Thông Tin Sinh Viên</div>
+          <div class="thongtincanhan chitiet">
+            <div class="picture-box">
+              <img src="" alt="Ảnh sinh viên" class="picture" id="studentPicture" />
+            </div>
+            <div class="thongtin1">
+              <div class="thongtin1-box1">
+                <div>Họ và tên :</div>
+                <div id="svHoTen">...</div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Ngày sinh :</div>
+                <div id="svNgaySinh">...</div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Khoa :</div>
+                <div id="svKhoa">...</div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Lớp học phần :</div>
+                <div id="svLopHocPhan">...</div>
+              </div>
+            </div>
+            <div class="thongtin1">
+              <div class="thongtin1-box1">
+                <div>MSSV :</div>
+                <div id="svMSSV">...</div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>Email :</div>
+                <div id="svEmail">...</div>
+              </div>
+              <div class="thongtin1-box1">
+                <div>SDT :</div>
+                <div id="svSDT">...</div>
+              </div>
+              <div class="thongtin1-box2 special">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gachchan"></div>
+
+          <div class="text-thongtindoan">Thông Tin Đồ Án</div>
+          <div class="thongtindoan">
+            <div class="right-container-top">
+              <div class="right-container-info">
+                <div class="thongtin1-box1">
+                  <div>ID đồ án :</div>
+                  <div id="daId">...</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Tên đồ án :</div>
+                  <div id="daTen">...</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Ngày bắt đầu :</div>
+                  <div id="daNgayBatDau">...</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Ngày kết thúc :</div>
+                  <div id="daNgayKetThuc">...</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>Trạng thái :</div>
+                  <div id="daStatus">...</div>
+                </div>
+                <div class="thongtin1-box1">
+                  <div>GV Hướng Dẫn :</div>
+                  <div id="daGVHD">...</div>
+                </div>
+              </div>
+              <div class="right-container-detail">
+                <h1>Mô tả :</h1>
+                <textarea
+                  placeholder="Thông tin mô tả của đồ án ..."
+                  id="daMoTa"
+                  readonly
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const doAnId = urlParams.get('doAnId');
+      console.log("DoAnId lấy từ URL:", doAnId);
+
+      async function fetchStudentAndProject(doAnId) {
+        try {
+          const response = await fetch(
+            `http://localhost:5266/api/QLDoAnTheoMSSV/GetByDoAnId?doAnId=${doAnId}`
+          );
+          if (!response.ok) throw new Error("Không tìm thấy dữ liệu hoặc lỗi server");
+
+          const data = await response.json();
+
+          if (data.sinhVien) {
+            document.getElementById("svHoTen").textContent = data.sinhVien.hoTen || "...";
+            document.getElementById("svNgaySinh").textContent = data.sinhVien.ngaySinh || "...";
+            document.getElementById("svKhoa").textContent = data.sinhVien.khoa || "...";
+            document.getElementById("svLopHocPhan").textContent = data.sinhVien.lopHocPhan || "...";
+            document.getElementById("svMSSV").textContent = data.sinhVien.mssv || "...";
+            document.getElementById("svEmail").textContent = data.sinhVien.email || "...";
+            document.getElementById("svSDT").textContent = data.sinhVien.sdt || "...";
+          }
+
+          if (data.doAn) {
+            document.getElementById("daId").textContent = data.doAn.doAnId || "...";
+            document.getElementById("daTen").textContent = data.doAn.tenDoAn || "...";
+            document.getElementById("daNgayBatDau").textContent = data.doAn.ngayBatDau || "...";
+            document.getElementById("daNgayKetThuc").textContent = data.doAn.ngayKetThuc || "...";
+            document.getElementById("daStatus").textContent = data.doAn.status || "...";
+            document.getElementById("daGVHD").textContent = data.doAn.gvhd || data.doAn.GVHD || "...";
+            document.getElementById("daMoTa").value = data.doAn.moTa || "";
+          }
+
+        } catch (error) {
+          alert(error.message);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        if (doAnId) {
+          fetchStudentAndProject(doAnId);
+        } else {
+          alert("Không tìm thấy doAnId trong URL");
+        }
+      });
+      function LogOut() {
+        localStorage.clear();
+        window.location.href = "../Login/index.html";
+      };
+    </script>
+
+  </body>
+</html>
