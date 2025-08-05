@@ -116,7 +116,7 @@ Academic staff are granted full administrative control over the system. They can
 
 - 🔐 **Change personal password**: Maintain account security.
 
-<img width="755" height="439" alt="image" src="https://github.com/user-attachments/assets/9688e8a7-3070-4568-bcee-fa40efc7ed81" />
+<img width="986" height="569" alt="image" src="https://github.com/user-attachments/assets/468c56d5-37bc-4c6d-b79b-90a6977fc86f" />
 
 ## 🙏 Thank You
 
