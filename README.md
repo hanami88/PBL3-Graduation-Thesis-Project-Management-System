@@ -98,7 +98,7 @@ Lecturers can perform the following actions within the system:
 - 🔐 **Change password**: Secure their personal account.
 
 <img width="983" height="551" alt="image" src="https://github.com/user-attachments/assets/dfdc6b0b-01c5-447f-a0e2-3c7dfc9e70a9" />
-<img width="756" height="521" alt="image" src="https://github.com/user-attachments/assets/8df08c2b-2ff3-4a01-90f0-60cbc8d76a1a" />
+<img width="986" height="602" alt="image" src="https://github.com/user-attachments/assets/4807545d-2fed-42ad-9f67-3acde2eed5d3" />
 
 ### 🧑‍💼 Academic Staff (Admin)
 
@@ -112,7 +112,7 @@ Academic staff are granted full administrative control over the system. They can
   Upload and process Excel files to enter student grades in bulk using the **EPPlus** library, saving time and ensuring accuracy.
 
 > 🔥 The Excel import feature was designed to handle batch updates efficiently and is one of the standout features of the system.
-<img width="596" height="348" alt="image" src="https://github.com/user-attachments/assets/fc24b9e5-370b-4e6d-bcbb-5c83e1ee1ba6" />
+<img width="1021" height="601" alt="image" src="https://github.com/user-attachments/assets/13dcf946-8ebf-468f-984e-a88be9c74fc0" />
 
 - 🔐 **Change personal password**: Maintain account security.
 
